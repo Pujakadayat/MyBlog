@@ -1,0 +1,24 @@
+asgiref
+Django
+# allows us  to fix that cross origin request issue
+django-cors-headers 
+
+djangorestframework
+
+#  for handleling our JWT  authentication
+djangorestframework-simplejwt
+
+PyJWT
+pytz
+sqlparse
+#  postris SQL  database
+psycopg2-binary 
+
+#  for loading in some env variables
+python-dotenv
+pymysql
+
+
+mysqlclient
+
+dj-database-url
