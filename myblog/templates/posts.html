@@ -8,7 +8,7 @@
 
 <div class="container-custom">
     <div class="row">
-        <div class="col s12 12 112">
+        <div class="col s12 m10 ">
 <h3> {{post.title}} </h3>
 <p>
  ({{post.cat.title}})</p>
@@ -19,6 +19,31 @@
 <p>
     {{post.content | safe}}
 </p>
+        </div>
+        <div class="col s12 m2">
+
+                   {% for cat in cats%}
+        <div class="card-item">
+            <div class="img-container">
+              <img src="/media/{{cat.image}}" class = "responsive-img"   alt ="">
+            </div>
+            <div class="card-content">
+             <b>
+
+                    {{cat.title}}
+             </b>  
+             <p class= "truncate">{{cat.description}}</p> 
+                <div class="container center-align mt20">
+                <a href="/category/{{cat.urls}} "  class = "btn bg-primary">View</a>
+            </div>
+            </div>
+         
+
+        </div>
+
+
+
+    {%endfor%}
         </div>
     </div>
 

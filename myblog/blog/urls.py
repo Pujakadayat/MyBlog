@@ -23,5 +23,8 @@ from .views import *
 
 urlpatterns = [
 path('home/',home),
-path('blog/<slug:url>',post)
+path('blog/<slug:url>',post),
+
+path('category/<slug:urls>', category)
+
 ] 

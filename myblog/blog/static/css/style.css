@@ -10,3 +10,7 @@ background: #477091!important;
     width: 90%!important;
     margin: auto;
 }
+
+.card-item{
+    margin-left: 10px;
+}
