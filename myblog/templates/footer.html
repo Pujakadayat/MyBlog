@@ -1,26 +1,66 @@
-
+{% load i18n %}
+{% load static %}
         <footer class="page-footer bg-primary">
           <div class="container">
             <div class="row">
-              <div class="col l6 s12">
+   <title> {% translate 'Footer' %}</title>
+              <!-- MY BLog Section -->
+              <div class="col l4 s12">
                 <h5 class="white-text">MyBlogs</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <p class="grey-text text-lighten-4">A place to share knowledge and ideas</p>
+                <form>
+                  <!-- <div class="input-field">
+                    <input id="email" type="email" class="validate white-text">
+                    <label for="email">Subscribe to our update</label>
+                  </div> -->
+                </form>
               </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+
+              <!-- Community Section -->
+              <div class="col l4  s12">
+                <h5 class="white-text">Community</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Meetups</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Discussion Boards</a></li>
+                                    <li><a class="grey-text text-lighten-3" href="#!">Blogger's Forum</a></li>
+
                 </ul>
               </div>
+
+              <!-- Help Section -->
+            <div class="col l4  s12">
+                <h5 class="white-text">Help</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Help Center</a></li>        
+                            <li><a class="grey-text text-lighten-3" href="#!">Help Forum</a></li>
+                                              <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>              
+                                                  <li><a class="grey-text text-lighten-3" href="#!">FAQs</a></li>
+            
+            
+                </ul>
+  </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2025 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2025 MyBlogs. All rights reserved
+            <a class="grey-text text-lighten-4 right" href="#!">Terms of Service</a>
+       
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
+
             </div>
           </div>
         </footer>

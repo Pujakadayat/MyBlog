@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,6 +30,25 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES":(
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ),
+    "DEFAULT_PERMISSION_CLASSES":[
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+
+SIMPLE_JWT = {
+    # acess token 30 min ma expire hunxa ra refresh token 1 din ma expire hunxa 
+    # REFRESH TOKEN IS SOMETHING WE CAN USE TO GET A NEW ACCESS TOKEN SO OUR REFRESH TOKEN SHOULD ALWAYS HAVE LARGER EXPIRATION DATE THAN ACCESS TOKEN
+   "ACCESS_TOKEN_LIFETIME" :timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),                                  
+}
 
 # Application definition
 
@@ -49,6 +70,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -62,7 +84,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,7 +145,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWS_CREDENTIALS = True
 # Folder media ko
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #  jaba pani kunai media file access garnu xa vane media lekhne
@@ -145,3 +168,14 @@ MATERIAL_ADMIN_SITE = {
     'TITLE':  'MyBlog',  # Admin site title
     
 }
+
+# language translation garepaxi tyo folder ko path denxa LOCAL_PATHS le
+
+LOCALE_PATHS = [
+    BASE_DIR/'locale'
+]
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ne', 'Nepali')
+]

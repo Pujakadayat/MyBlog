@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="container-custom style:font-size: 20px;font-weight:bold">
-   
+
     <!-- Set up your HTML -->
 <div class="owl-carousel">
 
@@ -25,7 +25,8 @@
                 <a href="/category/{{cat.urls}}"  class = "btn bg-primary">View</a>
             </div>
             </div>
-         
+
+        
 
         </div>
 
@@ -44,7 +45,7 @@
 {% for p in posts %}
 
 <div class="row">
-<div class="col s12 m8">
+<div class="col s12 m8" >
 
 <!-- truncatewords:60 garda 60 words matrai dekhauxa ra safe garda link haru saab dekhauxa  -->
 {{p.content |truncatewords:60| safe}}
