@@ -17,7 +17,7 @@ psycopg2-binary
 #  for loading in some env variables
 python-dotenv
 pymysql
-
+gunicorn
 
 mysqlclient
 
