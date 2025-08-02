@@ -24,6 +24,7 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
 path('home/',home),
+path('', home, name="home"),
 path('blog/<slug:url>',post),
 path('category/<slug:urls>', category),
 path("accounts/", include("django.contrib.auth.urls")),

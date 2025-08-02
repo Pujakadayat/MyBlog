@@ -18,16 +18,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-from blog.views import CreateUserView
+from blog.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/user/register/',CreateUserView.as_view(), name = "register"),
-    # path("api/token/", TokenObtainPairView.as_view(), name = "get_token"),
-    # path("api/token/refresh/", TokenRefreshView.as_view(), name = "refresh"),
+
     path("i18n/", include("django.conf.urls.i18n")),
    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
@@ -35,5 +33,7 @@ urlpatterns = [
 
 # uslai lai language chooose garna dena ho vane middleware acticate garnu praxa vanxa
 urlpatterns += i18n_patterns(
-  path('', include('blog.urls'))
+  path('', include('blog.urls')),
+  path('category/<str:urls>/', category, name= 'category'),
+  path('blog/<str:urls>/', post, name= 'post')
 )

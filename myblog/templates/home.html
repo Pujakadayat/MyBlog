@@ -4,67 +4,70 @@
 {% block title%} Welcome to MyBlog {%endblock%}
 
 {% block content %}
-
-<div class="container-custom style:font-size: 20px;font-weight:bold">
-
-    <!-- Set up your HTML -->
-<div class="owl-carousel">
+<div class="card" style="padding: 20px; margin: 20px 0;  ">
+<div class="container-custom" style= "font-size: 20px;  overflow-x:auto; white-space: nowrap; margin-top: 20px;">
+<div class="category-scroll" style="display: flex; gap:20px;">
 
         {% for cat in cats%}
-        <div class="card-item">
-            <div class="img-container">
+        <div class="card-item" style = "min-width: 250px; display: inline-block;">
+            <div class="img-container" >
               <img src="/media/{{cat.image}}" class = "responsive-img"   alt ="">
             </div>
             <div class="card-content">
-             <div class="card-title">
-
-                    {{cat.title}}
-             </div>  
+             <div class="card-title" style="font-weight:bold;"> {{cat.title}} </div>  
              <p class= "truncate">{{cat.description}}</p> 
                 <div class="container center-align mt20">
-                <a href="/category/{{cat.urls}}"  class = "btn bg-primary">View</a>
+                <a href="/category/{{cat.urls}}"  class = "btn" style="background-color:#090909;">View</a>
+                
+        <!-- <i class="material-icons">mode_comment</i> {{cat.comment_count}} comments -->
             </div>
             </div>
-
-        
-
         </div>
-
-
 
     {%endfor%}
 </div>
-
 </div>
 
-<div class="container">
+<div class="container" >
     <div class="row">
         <div class="col s12 ">
 
             
 {% for p in posts %}
 
-<div class="row">
+<div class="row" >
 <div class="col s12 m8" >
-
-<!-- truncatewords:60 garda 60 words matrai dekhauxa ra safe garda link haru saab dekhauxa  -->
+<!-- 
+ truncatewords:60 garda 60 words matrai dekhauxa ra safe garda link haru saab dekhauxa   -->
 {{p.content |truncatewords:60| safe}}
+
 <div class="mt20">
-    <a href = "/blog/{{p.url}}" class="btn bg-primary">Read More...</a>
+    <a href = "/blog/{{p.url}}" class="btn" style="background-color:#090909; color:white">Read More...</a>
 </div>
 </div>
 <div class="col s12 m4">
-    <img src="/media/{{p.image}}" class = "responsive-img" style="margin-top: 10px;" >
+    <img src="/media/{{p.image}}" class = "responsive-img" style="margin-top: 10px; border: 2px solid rgba(209, 213, 219, 0.3);" >
+    <div class = "mt10">
+                       <i class="material-icons">mode_comment</i> {{p.comment_count}}
+<ul>
+  {% for comment in comments %}
+    <li><strong>{{ comment.name }}</strong>: {{ comment.message }}</li>
+
+  {% endfor %}
+</ul>                   
 </div>
+</div>
+
 </div>
 {% endfor %}
 
 
 
-        </div>
-     
-    </div>
+    </div></div>
 </div>
+     </div>
+
+
 
 
 

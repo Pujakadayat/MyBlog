@@ -32,7 +32,7 @@ def home(request):
 
     # load all the post from db(10)
     posts= Post.objects.all()[:11]
-    # print(posts)
+    print(posts)
 
     cats = Category.objects.all()
 
@@ -41,11 +41,16 @@ def home(request):
         'cats':cats,
         'output':output
     }
+    for post in posts:
+      post.comment_count = post.comment_set.filter(is_approved = True).count()
     return render(request, 'home.html',data)
 
 def post(request,url):
     post = Post.objects.get(url=url)
     cats = Category.objects.all()
+    
+    post.comment_count = post.comment_set.filter(is_approved = True).count()
+
     return render(request, 'posts.html', {'post':post, 'cats':cats})
 
 
@@ -53,4 +58,8 @@ def category(request,urls):
 
     cat= Category.objects.get(urls = urls)
     posts = Post.objects.filter(cat = cat)
+    for post in posts:
+      post.comment_count = post.comment_set.filter(is_approved = True).count()
     return render(request,"category.html",{'cat':cat, 'posts':posts})
+
+

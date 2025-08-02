@@ -19,6 +19,9 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('cat',)
     list_per_page = 50
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('blog', 'name', 'email', 'message', 'is_approved','date')
+
 
     class Media:
         js = ('https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.j','js/script.js',)
@@ -27,3 +30,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Category,CategoryAdmin)
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment,CommentAdmin)
